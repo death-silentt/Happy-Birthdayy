@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Chudail ❤️‍🔥🫶</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=playfair-display@700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#2a0a2a;
+  --pink:#ff3879;
+  --soft:#ff74a4;
+  --glow:rgba(255,100,150,.6);
+}
+body{
+  font-family:'Satoshi',sans-serif;
+  background:var(--bg);
+  color:#fce7f3;
+  overflow:hidden;
+}
+#aurora-background{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(at 15% 15%, hsla(330,80%,75%,.5), transparent 60%),
+    radial-gradient(at 85% 20%, hsla(300,70%,70%,.4), transparent 60%),
+    radial-gradient(at 20% 85%, hsla(350,90%,80%,.4), transparent 60%),
+    radial-gradient(at 80% 80%, hsla(280,75%,65%,.5), transparent 60%);
+  opacity:.75;
+  z-index:0;
+}
+#app{
+  position:relative;
+  z-index:2;
+  display:grid;
+  place-items:center;
+  height:100vh;
+}
+.step{
+  position:absolute;
+  max-width:860px;
+  background:rgba(255,150,200,.1);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,200,220,.25);
+  border-radius:2rem;
+  padding:2.5rem;
+  text-align:center;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.95);
+  top:50%;
+  left:50%;
+  pointer-events:none;
+}
+.step.active{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+  pointer-events:auto;
+}
+.anim-child{
+  opacity:0;
+  transform:translateY(30px);
+}
+.btn{
+  background:linear-gradient(90deg,var(--soft),var(--pink));
+  padding:.9rem 2.6rem;
+  border-radius:9999px;
+  font-weight:700;
+  box-shadow:0 0 30px var(--glow);
+}
+.heart{
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+}
+
+/* POLAROID */
+.polaroid{
+  position:relative;
+  background:linear-gradient(to bottom right,#fff0f6,#ffe4f0);
+  padding:1rem;
+  padding-bottom:1.8rem;
+  border-radius:1rem;
+  box-shadow:0 18px 40px rgba(0,0,0,.4),
+              0 0 30px var(--glow);
+  transform:rotate(var(--rot)) scale(.95);
+  animation:sway 6s ease-in-out infinite alternate;
+}
+.polaroid:hover{transform:rotate(0deg) scale(1.05)}
+.polaroid::before{
+  content:"";
+  position:absolute;
+  top:-12px;
+  left:50%;
+  width:70px;
+  height:26px;
+  background:rgba(255,255,255,.75);
+  transform:translateX(-50%) rotate(-4deg);
+  border-radius:4px;
+}
+.polaroid img{border-radius:.75rem}
+.caption{
+  margin-top:.7rem;
+  font-weight:600;
+  color:#5a0c3b;
+}
+@keyframes sway{
+  from{transform:rotate(var(--rot)) translateY(0)}
+  to{transform:rotate(calc(var(--rot)*-1)) translateY(-6px)}
+}
+
+/* SECRET OVERLAY */
+#secret-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(20,0,20,.85);
+  backdrop-filter:blur(25px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  opacity:0;
+  pointer-events:none;
+}
+#secret-card{
+  max-width:720px;
+  background:rgba(255,170,210,.15);
+  border:1px solid rgba(255,200,230,.35);
+  border-radius:2rem;
+  padding:2.5rem;
+  text-align:center;
+  box-shadow:0 0 60px var(--glow);
+}
+</style>
+</head>
+
+<body>
+<div id="aurora-background"></div>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bg-music" loop>
+  <source src="music.mpeg" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- SECRET NOTE -->
+<div id="secret-overlay">
+  <div id="secret-card">
+    <h2 class="text-3xl font-bold mb-4">Just Between Us ❤️</h2>
+    <p class="leading-relaxed text-lg">
+      Hey, I want to tell you one thing —<br>
+      I am always with you in your highs or lows.<br>
+      I love you ❤️
+      <br><br>
+      Sometimes I get irritated with you<br>
+      but I never get bored of you.
+      <br><br>
+      Your bak bak makes my day.<br>
+      Without bak bak & gossips,<br>
+      I always feel something missing.
+      <br><br>
+      <span class="font-semibold text-pink-300">
+        I LOVE YOU &lt;3
+      </span>
+    </p>
+    <button id="close-secret" class="btn mt-6 text-white">
+      Close 🫶
+    </button>
+  </div>
+</div>
+
+<div id="app">
+<main id="step-container">
+
+<!-- STEP 1 -->
+<div id="step1" class="step active">
+  <div class="anim-child text-7xl heart mb-6">❤️‍🔥🫶</div>
+  <h1 class="anim-child text-4xl font-bold mb-4">Oye Chudail.</h1>
+  <p class="anim-child mb-8">
+    Happy 19th Birthday to my favorite chudail,
+    cutest chidda and certified kachra.
+  </p>
+  <!-- Music Button -->
+  <button id="music-btn" class="anim-child btn text-white mb-4">
+    Let's Play Some Music 🎵
+  </button>
+  <!-- Start Celebration Button -->
+  <button id="start-btn" class="anim-child btn text-white">
+    Start the Celebrations
+  </button>
+</div>
+
+<!-- STEP 2 -->
+<div id="step2" class="step">
+  <h2 class="anim-child text-4xl font-bold mb-4">Happy Birthday My Heart 🎂</h2>
+  <p class="anim-child mb-8">
+    This is our 4th birthday together — my biggest flex.
+  </p>
+  <button id="next-btn-2" class="anim-child btn text-white">Aur Suno 👀</button>
+</div>
+
+<!-- STEP 3 -->
+<div id="step3" class="step">
+  <h2 class="anim-child text-4xl font-bold mb-6">
+    Reasons I Still Haven’t Blocked You
+  </h2>
+  <p class="anim-child">
+    Best friend. Comfort. Chaos. All in one cute chidda.
+  </p>
+  <button id="next-btn-3" class="anim-child btn text-white mt-8">
+    Proof Time 😌
+  </button>
+</div>
+
+<!-- STEP 4 -->
+<div id="step4" class="step">
+  <h2 class="anim-child text-4xl font-bold mb-6">Certified Chaos ❤️‍🔥</h2>
+
+  <div class="anim-child grid grid-cols-1 md:grid-cols-3 gap-10 mb-6">
+    <div class="polaroid" style="--rot:-6deg">
+      <img src="pic1.jpg"><div class="caption">My Eyes got Stack🫶</div>
+    </div>
+    <div class="polaroid" style="--rot:4deg">
+      <img src="pic2.jpg"><div class="caption">Fallen Thousand Times❤️‍🔥</div>
+    </div>
+    <div class="polaroid" style="--rot:-3deg">
+      <img src="pic3.jpg"><div class="caption">Steals My heart &hearts;</div>
+    </div>
+  </div>
+
+  <button id="next-btn-4" class="anim-child btn text-white">
+    One Last Thing…
+  </button>
+</div>
+
+<!-- STEP 5 FINAL -->
+<div id="step5" class="step max-w-3xl">
+  <h2 class="anim-child text-4xl font-bold mb-6">
+    From My Heart 🫶
+  </h2>
+
+  <div id="final-message" class="text-lg leading-relaxed space-y-4 text-gray-200">
+    <p>Happy 19th Birthday to my favorite chudail, cutest chidda, and certified kachra ❤️‍🔥</p>
+    <p>Yes, I roasted you—but only because I love you more than anything.</p>
+    <p>This is our 4th birthday together, and honestly, that’s my biggest flex.</p>
+    <p>From laughing at dumb things to annoying each other daily, every year with you has been my favorite chapter.</p>
+    <p>You’ve grown more beautiful, more crazy, and somehow even more lovable.</p>
+    <p>You’re my cute chudail who scares me, loves me, annoys me, and makes my life better.</p>
+    <p>Thank you for being my best friend, my comfort and my chaos.</p>
+    <p class="font-semibold text-pink-300">
+      Happy Birthday, betu 💕 I love you more than you love fighting with me 😏
+    </p>
+  </div>
+
+  <p class="anim-child text-sm opacity-60 mt-6">
+    (Surpise.... long-press anywhere 🤫)
+  </p>
+
+  <button id="confetti-btn" class="anim-child btn text-white mt-6">
+    Celebrate!
+  </button>
+</div>
+
+</main>
+</div>
+
+<script>
+const steps = document.querySelectorAll('.step');
+const music = document.getElementById('bg-music');
+
+// Play music when user clicks the button
+document.getElementById('music-btn').onclick = () => {
+  music.volume = 0.45;
+  music.play().catch(()=>{});
+  document.getElementById('music-btn').style.display = 'none'; // hide after playing
+};
+
+function showStep(n){
+  steps.forEach(s=>s.classList.remove('active'));
+  const step=document.getElementById(`step${n}`);
+  step.classList.add('active');
+
+  gsap.fromTo(
+    step.querySelectorAll('.anim-child'),
+    {opacity:0,y:30},
+    {opacity:1,y:0,stagger:.2,duration:1}
+  );
+
+  if(n===5){
+    gsap.fromTo(
+      "#final-message p",
+      {opacity:0,y:20},
+      {opacity:1,y:0,stagger:1.2,duration:1}
+    );
+  }
+}
+
+document.getElementById('start-btn').onclick = () => showStep(2);
+document.getElementById('next-btn-2').onclick = () => showStep(3);
+document.getElementById('next-btn-3').onclick = () => showStep(4);
+document.getElementById('next-btn-4').onclick = () => showStep(5);
+
+document.getElementById('confetti-btn').onclick = () => {
+  confetti({particleCount:250, spread:360});
+};
+
+/* SECRET LONG PRESS ONLY ON STEP 5 */
+let pressTimer;
+const overlay = document.getElementById('secret-overlay');
+
+function startPress(){
+  if(document.getElementById('step5').classList.contains('active')){
+    pressTimer = setTimeout(()=>{
+      overlay.style.pointerEvents = "auto";
+      gsap.to(overlay,{opacity:1,duration:1});
+    },3000);
+  }
+}
+function cancelPress(){ clearTimeout(pressTimer); }
+
+document.addEventListener('mousedown',startPress);
+document.addEventListener('mouseup',cancelPress);
+document.addEventListener('touchstart',startPress);
+document.addEventListener('touchend',cancelPress);
+
+/* CLOSE SECRET */
+document.getElementById('close-secret').onclick = () => {
+  gsap.to(overlay,{
+    opacity:0,
+    duration:1,
+    onComplete:()=>overlay.style.pointerEvents="none"
+  });
+};
+
+showStep(1);
+</script>
+</body>
+</html>
